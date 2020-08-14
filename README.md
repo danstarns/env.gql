@@ -19,9 +19,9 @@ const envGQL = require("env-gql");
 
 const typeDefs = `
     input Config {
-        PORT: Number
-        URL: String
-        SECRET: String
+        PORT: Number!
+        URL: String!
+        SECRET: String!
     }
 `;
 
@@ -29,11 +29,13 @@ const config = envGQL({ typeDefs });
 ```
 
 # Using .gql files
+> The idiomatic file convention is `.env.gql`
+
 ```js
 const path = require("path");
 const envGQL = require("env-gql");
 
-const typeDefsPath = path.join(__dirname, "./Config.gql");
+const typeDefsPath = path.join(__dirname, "./.env.gql");
 const config = envGQL({ typeDefs: typeDefsPath });
 ```
 

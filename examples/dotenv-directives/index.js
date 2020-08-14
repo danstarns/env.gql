@@ -9,7 +9,7 @@ const path = require("path");
 const fs = require("fs");
 require('dotenv').config({ path: path.join(__dirname, "./.env") })
 
-const typeDefs = fs.readFileSync(path.join(__dirname, "./env.gql"), "utf-8");
+const typeDefs = fs.readFileSync(path.join(__dirname, "./.env.gql"), "utf-8");
 
 const config = envGQL({
   typeDefs: `
