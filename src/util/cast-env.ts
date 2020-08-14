@@ -8,8 +8,8 @@ function castEnv(configInput: InputObjectTypeDefinitionNode): Env {
 
     return {
       name: field.name.value,
-      type: x.type.type.name.value,
-      required: x.type.kind === "NonNullType",
+      type: x.type?.type?.name?.value,
+      required: x.type?.kind === "NonNullType",
     };
   });
 
