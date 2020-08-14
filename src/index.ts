@@ -16,10 +16,6 @@ function envGQL<C = Options["override"]>(options: Options): C {
     throw new Error("typeDefs required");
   }
 
-  if (typeof options.typeDefs !== "string") {
-    throw new TypeError("typeDefs must be a string");
-  }
-
   if (options.schemaTransforms) {
     if (!Array.isArray(options.schemaTransforms)) {
       throw new TypeError("schemaTransforms must be a array");
