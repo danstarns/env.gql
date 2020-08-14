@@ -2,7 +2,7 @@
 Use GraphQL Type Definitions To Validate process.env
 
 ```bash
-$ npm i env-gql
+$ npm i env.gql
 ```
 
 # Motivation
@@ -15,7 +15,7 @@ Fed up of not knowing what config to pass to a server? Use GraphQL to explain an
 # Example
 
 ```js
-const envGQL = require("env-gql");
+const envGQL = require("env.gql");
 
 const typeDefs = `
     input Config {
@@ -33,7 +33,7 @@ const config = envGQL({ typeDefs });
 
 ```js
 const path = require("path");
-const envGQL = require("env-gql");
+const envGQL = require("env.gql");
 
 const typeDefsPath = path.join(__dirname, "./.env.gql");
 const config = envGQL({ typeDefs: typeDefsPath });
@@ -43,7 +43,7 @@ const config = envGQL({ typeDefs: typeDefsPath });
 > Using [graphql-constraint-directive](https://www.npmjs.com/package/graphql-constraint-directive)
 
 ```js
-const envGQL = require("env-gql");
+const envGQL = require("env.gql");
 const { constraintDirective, constraintDirectiveTypeDefs } = require('graphql-constraint-directive')
 
 const typeDefs = `
@@ -64,7 +64,7 @@ const config = envGQL({
 
 # Override
 ```js
-const envGQL = require("env-gql");
+const envGQL = require("env.gql");
 
 const typeDefs = `
     input Config {
@@ -86,7 +86,7 @@ const config = envGQL({
 
 # graphql-tag
 ```js
-const envGQL = require("env-gql");
+const envGQL = require("env.gql");
 const gql = require("graphql-tag");
 
 const typeDefs = gql`
