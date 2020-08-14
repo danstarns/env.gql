@@ -10,9 +10,12 @@ Fed up of not knowing what config to pass to a server? Use GraphQL to explain an
 
 ## Inspiration 
 1. [GraphQL](https://www.npmjs.com/package/graphql)
-2. [env-var](https://www.npmjs.com/package/env-var)
+2. [dotenv](https://www.npmjs.com/package/dotenv)
+3. [env-var](https://www.npmjs.com/package/env-var)
 
 # Example
+
+> process.env.PORT will be casted to a number, process.env.DEV will be casted to a boolean. 
 
 ```js
 const envGQL = require("env.gql");
@@ -22,6 +25,7 @@ const typeDefs = `
         PORT: Number!
         URL: String!
         SECRET: String!
+        DEV: Boolean!
     }
 `;
 
