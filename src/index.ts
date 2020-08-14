@@ -1,6 +1,6 @@
 import { mapSchema } from "@graphql-tools/utils";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { parseTypeDefs, stripEnv } from "./util";
+import { parseTypeDefs, stripEnv, castEnv } from "./util";
 import { print, graphqlSync, InputObjectTypeDefinitionNode } from "graphql";
 
 type MapSchema = typeof mapSchema;
@@ -68,6 +68,11 @@ function envGQL<C = Options["override"]>(options: Options): C {
     schemaTransforms: options.schemaTransforms,
   });
 
+  let newEnv = {};
+  if (!options.override) {
+    newEnv = castEnv(configInput);
+  }
+
   const { errors } = graphqlSync({
     schema: fakeSchema,
     source: `
@@ -76,7 +81,9 @@ function envGQL<C = Options["override"]>(options: Options): C {
       }
     `,
     variableValues: {
-      Config: options.override ? options.override : stripEnv(configInput),
+      Config: options.override
+        ? options.override
+        : stripEnv(configInput, newEnv),
     },
   });
 
@@ -84,7 +91,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
     throw new Error(errors[0].message);
   }
 
-  return (options.override ? options.override : process.env) as C;
+  return (options.override ? options.override : newEnv) as C;
 }
 
 export = envGQL;
