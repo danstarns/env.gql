@@ -38,30 +38,7 @@ const typeDefs = `
 const config = envGQL({ typeDefs });
 ```
 
-# TypeScript
-```ts
-import envGQL from "env.gql";
-
-const typeDefs = `
-  input Config {
-    PORT: Int
-    URL: String
-    SECRET: String
-  }
-`;
-
-interface Config {
-  PORT: number;
-  URL: string;
-  SECRET: string;
-}
-
-const config = envGQL<Config>({
-  typeDefs,
-});
-```
-
-# Using .gql files
+# Using .gql file
 > The idiomatic file convention is `.env.gql`
 
 ```js
@@ -96,6 +73,8 @@ const config = envGQL({
 ```
 
 # Override
+> Use to validate not just process.env
+
 ```js
 const envGQL = require("env.gql");
 
@@ -132,5 +111,28 @@ const typeDefs = gql`
 
 const config = envGQL({
   typeDefs: typeDefs,
+});
+```
+
+# TypeScript
+```ts
+import envGQL from "env.gql";
+
+const typeDefs = `
+  input Config {
+    PORT: Int
+    URL: String
+    SECRET: String
+  }
+`;
+
+interface Config {
+  PORT: number;
+  URL: string;
+  SECRET: string;
+}
+
+const config = envGQL<Config>({
+  typeDefs,
 });
 ```
