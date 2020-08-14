@@ -5,12 +5,17 @@ Use GraphQL Type Definitions To Validate process.env
 $ npm i env-gql
 ```
 
-> Work in progress 🚧
+# Motivation
+Fed-up of not knowing what config to pass to your server? Use GraphQL to explain and validate your environment variables. Never see `cannot connect to 'undefined'` again 🎉
+
+## Inspiration 
+1. [GraphQL](https://www.npmjs.com/package/graphql)
+2. [env-var](https://www.npmjs.com/package/env-var)
 
 # Example
 
 ```js
-const envGql = require("env-gql");
+const envGQL = require("env-gql");
 
 const typeDefs = `
     input Config {
@@ -20,23 +25,23 @@ const typeDefs = `
     }
 `;
 
-const config = envGql({ typeDefs });
+const config = envGQL({ typeDefs });
 ```
 
 # Using .gql files
 ```js
 const path = require("path");
-const envGql = require("env-gql");
+const envGQL = require("env-gql");
 
 const typeDefsPath = path.join(__dirname, "./Config.gql");
-const config = envGql({ typeDefs: typeDefsPath });
+const config = envGQL({ typeDefs: typeDefsPath });
 ```
 
 # Using directives
 > Using [graphql-constraint-directive](https://www.npmjs.com/package/graphql-constraint-directive)
 
 ```js
-const envGql = require("env-gql");
+const envGQL = require("env-gql");
 const { constraintDirective, constraintDirectiveTypeDefs } = require('graphql-constraint-directive')
 
 const typeDefs = `
@@ -49,7 +54,7 @@ const typeDefs = `
     ${constraintDirectiveTypeDefs}
 `;
 
-const config = envGql({ 
+const config = envGQL({ 
     typeDefs,
     schemaTransforms: [constraintDirective()]
 });
@@ -57,7 +62,7 @@ const config = envGql({
 
 # Override
 ```js
-const envGql = require("env-gql");
+const envGQL = require("env-gql");
 
 const typeDefs = `
     input Config {
@@ -67,7 +72,7 @@ const typeDefs = `
     }
 `;
 
-const config = envGql({ 
+const config = envGQL({ 
     typeDefs,
     override: {
         PORT: 4000, 
