@@ -2,10 +2,17 @@
   "name": "env.gql",
   "version": "1.0.0",
   "description": "Use GraphQL Type Definitions To Validate process.env",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && tsc"
   },
+  "keywords": [
+    "env",
+    "graphql",
+    "config",
+    "process"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danstarns/env.gql.git"
@@ -15,5 +22,16 @@
   "bugs": {
     "url": "https://github.com/danstarns/env.gql/issues"
   },
-  "homepage": "https://github.com/danstarns/env.gql#readme"
+  "homepage": "https://github.com/danstarns/env.gql#readme",
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
 }

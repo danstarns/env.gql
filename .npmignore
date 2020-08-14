@@ -1,0 +1,12 @@
+.github/
+.nyc_output/
+.vscode/
+examples/
+node_modules/
+src/
+test/
+.babelrc
+.dockerignore
+.eslintrc.js
+README.md
+tsconfig.json
