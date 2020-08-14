@@ -1,6 +1,10 @@
 # env.gql
 Use GraphQL Type Definitions To Validate process.env
 
+```bash
+$ npm i env-gql
+```
+
 > Work in progress 🚧
 
 # Example
