@@ -83,3 +83,21 @@ const config = envGQL({
     }
 });
 ```
+
+# graphql-tag
+```js
+const envGQL = require("env-gql");
+const gql = require("graphql-tag");
+
+const typeDefs = gql`
+  input Config {
+    PORT: Int
+    URL: String
+    SECRET: String
+  }
+`;
+
+const config = envGQL({
+  typeDefs: typeDefs,
+});
+```

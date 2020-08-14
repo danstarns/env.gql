@@ -37,6 +37,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "graphql-constraint-directive": "^2.0.3",
+    "graphql-tag": "^2.11.0",
     "mocha": "^8.1.1",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
