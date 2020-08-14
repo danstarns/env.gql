@@ -1,4 +1,6 @@
 # env.gql
+![Node.js CI](https://github.com/danstarns/env.gql/workflows/Node.js%20CI/badge.svg?branch=master&event=push) [![npm version](https://badge.fury.io/js/env.gql.svg)](https://www.npmjs.com/package/env.gql) [![TypeScript Compatible](https://img.shields.io/npm/types/scrub-js.svg)](https://github.com/danstarns/env.gql)
+
 Use GraphQL Type Definitions To Validate process.env
 
 ```bash
@@ -6,6 +8,8 @@ $ npm i env.gql
 ```
 
 [Examples](https://github.com/danstarns/env.gql/tree/master/examples)
+
+> This library does not modify process.env directly. 
 
 # Motivation
 Fed up of not knowing what config to pass to a server? Use GraphQL to explain and validate your environment variables. Never see `cannot connect to 'undefined'` again 🎉
