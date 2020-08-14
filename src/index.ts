@@ -1,14 +1,19 @@
 import { mapSchema } from "@graphql-tools/utils";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { parseTypeDefs, stripEnv, castEnv } from "./util";
-import { print, graphqlSync, InputObjectTypeDefinitionNode } from "graphql";
+import {
+  print,
+  graphqlSync,
+  InputObjectTypeDefinitionNode,
+  DocumentNode,
+} from "graphql";
 
 type MapSchema = typeof mapSchema;
 
 interface Options {
-  typeDefs: string;
-  schemaTransforms: MapSchema[];
-  override: { [k: string]: any };
+  typeDefs: string | DocumentNode;
+  schemaTransforms?: MapSchema[];
+  override?: { [k: string]: any };
 }
 
 function envGQL<C = Options["override"]>(options: Options): C {
