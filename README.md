@@ -6,7 +6,7 @@ $ npm i env-gql
 ```
 
 # Motivation
-Fed-up of not knowing what config to pass to your server? Use GraphQL to explain and validate your environment variables. Never see `cannot connect to 'undefined'` again 🎉
+Fed up of not knowing what config to pass to a server? Use GraphQL to explain and validate your environment variables. Never see `cannot connect to 'undefined'` again 🎉
 
 ## Inspiration 
 1. [GraphQL](https://www.npmjs.com/package/graphql)
