@@ -32,6 +32,29 @@ const typeDefs = `
 const config = envGQL({ typeDefs });
 ```
 
+# TypeScript
+```ts
+import envGQL from "env.gql";
+
+const typeDefs = `
+  input Config {
+    PORT: Int
+    URL: String
+    SECRET: String
+  }
+`;
+
+interface Config {
+  PORT: number;
+  URL: string;
+  SECRET: string;
+}
+
+const config = envGQL<Config>({
+  typeDefs,
+});
+```
+
 # Using .gql files
 > The idiomatic file convention is `.env.gql`
 
