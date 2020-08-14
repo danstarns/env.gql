@@ -1,0 +1,19 @@
+{
+  "name": "env.gql",
+  "version": "1.0.0",
+  "description": "Use GraphQL Type Definitions To Validate process.env",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danstarns/env.gql.git"
+  },
+  "author": "danielstarns@hotmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danstarns/env.gql/issues"
+  },
+  "homepage": "https://github.com/danstarns/env.gql#readme"
+}
