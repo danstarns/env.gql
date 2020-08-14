@@ -1,7 +1,7 @@
 import { mapSchema } from "@graphql-tools/utils";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { parseTypeDefs } from "./util";
-import { print, graphqlSync } from "graphql";
+import { parseTypeDefs, stripEnv } from "./util";
+import { print, graphqlSync, InputObjectTypeDefinitionNode } from "graphql";
 
 type MapSchema = typeof mapSchema;
 
@@ -32,7 +32,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
 
   const configInput = documentNode.definitions.find(
     (x) => x.kind === "InputObjectTypeDefinition" && x.name.value === "Config"
-  );
+  ) as InputObjectTypeDefinitionNode;
 
   if (!configInput) {
     throw new Error("typeDefs input Config {} required");
@@ -48,7 +48,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
     throw new Error("Query, Mutation & Subscription not supported");
   }
 
-  const newTypeDefs = `
+  const fakeTypeDefs = `
     ${print(documentNode)}
 
     type Query {
@@ -57,7 +57,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
   `;
 
   const fakeSchema = makeExecutableSchema({
-    typeDefs: newTypeDefs,
+    typeDefs: fakeTypeDefs,
     resolvers: {
       Query: {
         validate: () => {
@@ -68,8 +68,6 @@ function envGQL<C = Options["override"]>(options: Options): C {
     schemaTransforms: options.schemaTransforms,
   });
 
-  const config = options.override ? options.override : process.env;
-
   const { errors } = graphqlSync({
     schema: fakeSchema,
     source: `
@@ -78,7 +76,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
       }
     `,
     variableValues: {
-      Config: config,
+      Config: options.override ? options.override : stripEnv(configInput),
     },
   });
 
@@ -86,7 +84,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
     throw new Error(errors[0].message);
   }
 
-  return config as C;
+  return (options.override ? options.override : process.env) as C;
 }
 
 export = envGQL;
