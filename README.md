@@ -5,6 +5,8 @@ Use GraphQL Type Definitions To Validate process.env
 $ npm i env.gql
 ```
 
+[Examples](https://github.com/danstarns/env.gql/tree/master/examples)
+
 # Motivation
 Fed up of not knowing what config to pass to a server? Use GraphQL to explain and validate your environment variables. Never see `cannot connect to 'undefined'` again 🎉
 
