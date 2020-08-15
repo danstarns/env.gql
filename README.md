@@ -142,8 +142,8 @@ const config = envGQL<Config>({
 const typeDefs = `
   input Config {
     PORT: Int = 123
-    URL: String = "url"
-    SECRET: String = "url"
+    URL: String = "http://github.com"
+    SECRET: String = "supersecret"
     DEV: Boolean = false
   }
 `;
@@ -156,4 +156,22 @@ typeof config.PORT === "number"
 typeof config.URL === "string"
 typeof config.SECRET === "string"
 typeof config.DEV === "boolean"
+```
+
+# Required
+> Use GraphQL `!` symbol
+
+```js
+const typeDefs = `
+  input Config {
+    PORT: Int! # Required
+    URL: String
+    SECRET: String
+    DEV: Boolean
+  }
+`;
+
+const config = envGQL({
+  typeDefs: typeDefs,
+});
 ```
