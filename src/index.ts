@@ -17,9 +17,11 @@ interface Options {
 }
 
 function envGQL<C = Options["override"]>(options: Options): C {
-  if (!options.typeDefs) {
+  if (!options || !options.typeDefs) {
     throw new Error("typeDefs required");
   }
+
+  const documentNode = parseTypeDefs(options.typeDefs);
 
   if (options.schemaTransforms) {
     if (!Array.isArray(options.schemaTransforms)) {
@@ -28,8 +30,6 @@ function envGQL<C = Options["override"]>(options: Options): C {
   } else {
     options.schemaTransforms = [];
   }
-
-  const documentNode = parseTypeDefs(options.typeDefs);
 
   const configInput = documentNode.definitions.find(
     (x) => x.kind === "InputObjectTypeDefinition" && x.name.value === "Config"

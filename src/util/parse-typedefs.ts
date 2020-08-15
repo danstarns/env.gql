@@ -9,7 +9,7 @@ function parseTypeDefs(typeDefs: TypeDefsUnion): DocumentNode {
       try {
         return parse(typeDefs);
       } catch (error) {
-        throw new Error(`cannot resolve typeDefs: '${error}'.`);
+        throw new Error(`cannot parse typeDefs: '${error}'.`);
       }
     } else {
       return parse(fs.readFileSync(typeDefs, "utf8"));
