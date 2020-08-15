@@ -136,3 +136,24 @@ const config = envGQL<Config>({
   typeDefs,
 });
 ```
+
+# Defaults
+```js
+const typeDefs = `
+  input Config {
+    PORT: Int = 123
+    URL: String = "url"
+    SECRET: String = "url"
+    DEV: Boolean = false
+  }
+`;
+
+const config = envGQL({
+  typeDefs: typeDefs,
+});
+
+typeof config.PORT === "number"
+typeof config.URL === "string"
+typeof config.SECRET === "string"
+typeof config.DEV === "boolean"
+```

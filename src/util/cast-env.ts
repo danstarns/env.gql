@@ -2,33 +2,38 @@ import { InputObjectTypeDefinitionNode } from "graphql";
 
 type Env = { [k: string]: any };
 
-function castEnv(configInput: InputObjectTypeDefinitionNode): Env {
+function castEnv(configInput: InputObjectTypeDefinitionNode, newEnv: Env): Env {
   const gqlEnvs = configInput.fields.map((field) => {
     const x = field as any;
 
     return {
       name: field.name.value,
-      type: x.type?.type?.name?.value,
+      type: x.type?.type?.name?.value || x.type.name.value,
       required: x.type?.kind === "NonNullType",
+      default: x.defaultValue?.value,
     };
   });
 
-  const casted = gqlEnvs.reduce((res: any, x: any) => {
-    if (!process.env[x.name] && x.required) {
-      throw new Error(`process.env.${x.name} required`);
+  const casted = gqlEnvs.reduce((res: any, env: any) => {
+    if (!newEnv[env.name] && newEnv[env.name] !== false) {
+      if (!env.default && env.default !== false && env.required) {
+        throw new Error(`env.${env.name} required`);
+      } else {
+        newEnv[env.name] = env.default;
+      }
     }
 
-    switch (x.type) {
+    switch (env.type) {
       case "Boolean":
-        res[x.name] = JSON.parse(process.env[x.name]);
+        res[env.name] = JSON.parse(newEnv[env.name]);
         break;
 
       case "Int":
-        res[x.name] = Number(process.env[x.name]);
+        res[env.name] = Number(newEnv[env.name]);
         break;
 
       default:
-        res[x.name] = process.env[x.name];
+        res[env.name] = newEnv[env.name];
     }
 
     return res;

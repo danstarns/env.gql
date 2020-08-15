@@ -70,8 +70,10 @@ function envGQL<C = Options["override"]>(options: Options): C {
   });
 
   let newEnv = {};
-  if (!options.override) {
-    newEnv = castEnv(configInput);
+  if (options.override) {
+    newEnv = castEnv(configInput, options.override);
+  } else {
+    newEnv = castEnv(configInput, process.env);
   }
 
   const { errors } = graphqlSync({
@@ -82,9 +84,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
       }
     `,
     variableValues: {
-      Config: options.override
-        ? options.override
-        : stripEnv(configInput, newEnv),
+      Config: stripEnv(configInput, newEnv),
     },
   });
 
@@ -92,7 +92,7 @@ function envGQL<C = Options["override"]>(options: Options): C {
     throw new Error(errors[0].message);
   }
 
-  return (options.override ? options.override : newEnv) as C;
+  return newEnv as C;
 }
 
 export = envGQL;
